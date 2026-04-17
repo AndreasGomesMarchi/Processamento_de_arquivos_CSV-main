@@ -94,7 +94,6 @@ def processar_resumo(dados, campo_agrupamento):
     """Agrupa os dados e garante que todos os campos das fórmulas sejam somados."""
     agrupado = {}
     
-    # Todos os campos necessários para as 5 metas citadas no PDF / Alterei para tudo ficar dentro duma variavel pq o codigo estava gigantescco ali kkkkkkk
     campos_necessarios = [
         'julgados_2026', 'casos_novos_2026', 'dessobrestados_2026', 'suspensos_2026',
         'julgm2_a', 'distm2_a', 'suspm2_a',
