@@ -34,23 +34,19 @@ def processar_e_somar(caminho):
                 
     return somas_por_municipio
 
-# Adicione esta função ao seu arquivo parallel.py
 def concatenar_paralelo(pasta_entrada):
     """Lê todos os CSVs da pasta em paralelo e retorna uma lista única."""
     arquivos = [os.path.join(pasta_entrada, f) for f in os.listdir(pasta_entrada) if f.endswith(".csv")]
     
     with Pool() as p:
-        # Usa o ler_csv que já existe no seu file_handler
         resultados = p.map(ler_csv, arquivos)
     
-    # Achata a lista de listas em uma única lista de dados
     dados_unificados = [linha for sublista in resultados for linha in sublista]
     return dados_unificados
 
 def gerar_resumo_paralelo(pasta_entrada):
     arquivos = [os.path.join(pasta_entrada, f) for f in os.listdir(pasta_entrada) if f.endswith(".csv")]
 
-    # MAP: Distribui o processamento dos arquivos nos núcleos
     with Pool() as p:
         resultados_parciais = p.map(processar_e_somar, arquivos)
 
@@ -80,5 +76,4 @@ def filtrar_por_municipio_paralelo(dados, municipio):
     with Pool(num_processos) as p:
         resultados = p.map(filtrar_chunk, chunks)
     
-    # Junta os resultados de todos os processos
     return [item for sublist in resultados for item in sublist]
